@@ -13,9 +13,63 @@
 
     <!-- Assets -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- <script src="browser@4.js"></script> -->
     <style type="text/tailwindcss">
         body {
             font-family: 'Source Sans 3', Verdana, sans-serif;
+        }
+        
+        h3 {
+            @apply text-2xl font-semibold mb-4 w-full;
+        }
+
+        strong, b {
+            @apply text-stone-50;
+            letter-spacing: 1.05;
+        }
+
+        code {
+            @apply py-0.5 px-1.5 rounded-md;
+
+            font-size: 1.125rem;
+            margin: 0 0.25rem;
+
+            background: #543a46;
+            color: #ff2e4d;
+        }
+
+        /* Feature section */
+        /* Section layout: image/video on the left, title + description on the right */
+
+        .feature {
+            @apply flex flex-col md:flex-row items-center gap-6 md:gap-12 max-w-5xl px-4;
+            
+            @apply text-center;
+            @apply md:text-left;
+
+            /* alternated left-right layouts */
+            &:nth-child(even) {
+                @apply md:flex-row-reverse;
+                @apply md:text-right;
+            }
+
+            .feature-text {
+                @apply flex flex-col items-start max-w-xl;
+            }
+
+            /* video: autoplay, loop, muted, no controls, rounded corners, zoom to fill, 3/2 aspect ratio */
+            .feature-thumbnail {
+                @apply rounded-lg;
+                aspect-ratio: 3 / 2;
+                width: 100%;
+                max-width: 400px;
+                object-fit: cover;
+            }
+
+            /* space between sections */
+            & + & {
+                @apply mt-24;
+            }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
@@ -24,20 +78,106 @@
 </head>
 
 <body class="text-white" style="background: #141414; accent-color: #D62F49;">
-    <div class="h-full flex flex-col text-center justify-center items-center gap-4">
-        <span class="text-4xl md:text-5xl font-semibold">
-            Something great<br class="sm:hidden" /> is coming soon...
-        </span>
-        <div class="mb-8 sm:mb-12"></div>
-        <div id="crystal" class="w-2/5 lg:w-1/3 xl:w-1/4 aspect-square">
+    <div class="min-h-full flex flex-col text-center justify-start items-center gap-4">
+        <h1 class="text-center flex flex-col items-center my-8 md:my-20">
+            <img src="Group 2-1.png" alt="Fluorite" class="inline w-3/5 md:w-2/4 lg:w-1/3" />
+            <span class="text-white -mt-3 ml-18 text-3xl md:text-4xl xl:text-3xl" style="font-family: 'Tilt Neon';">Game
+                Engine</span>
+        </h1>
+
+        <!-- Description -->
+        <p class="max-w-3xl text-stone-200 px-4 text-sm sm:text-xl">
+            <strong>Fluorite is the first console-grade game engine fully integrated with Flutter.</strong><br>
+            Its reduced complexity by allowing you to write your game code directly in Dart, and using all of its great
+            developer tools.
+            By using a <code>FluoriteView</code> widget you can add multiple simultaneous views of your 3D scene,
+            as well as share state between game Entities and UI widgets - the Flutter way!
+        </p>
+
+        <!-- Sections -->
+
+        <div class="mt-32"></div> <!-- Spacer to push footer to bottom -->
+
+        <!-- 1. High-performance ECS core -->
+        <section class="feature" id="ecs-core">
+            <img src="fluorite-ecs.png" alt="ECS Diagram" class="feature-thumbnail" />
+            <div class="feature-text">
+                <h3 class="">High-performance ECS core</h3>
+                <p class="text-stone-400 text-sm sm:text-base">
+                    At the heart of Fluorite lies a data-oriented ECS (Entity-Component-System) architecture.
+                    It's written in C++ to allow for maximum performance and targeted optimizations, yielding great
+                    performance on lower-end/embedded hardware.
+                    At the same time, it allows you to write game code using familiar high-level game APIs in Dart,
+                    making most of your game development knowledge transferrable from other engines.
+                </p>
+            </div>
+        </section>
+
+        <!-- 2. Model-defined touch trigger zones -->
+        <section class="feature" id="touch-zones">
+            <video class="feature-thumbnail" autoplay loop muted playsinline>
+                <source src="fluorite-modelgtriggerzones.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+            <div class="feature-text">
+                <h3 class="">Model-defined touch trigger zones</h3>
+                <p class="text-stone-400 text-sm sm:text-base">
+                    This feature enables 3D Artists to define “clickable” zones directly in Blender, and to configure
+                    them to trigger specific events!
+                    Developers can then listen to <code>onClick</code> events with the specified tags to trigger all
+                    sorts of interactions!
+                    This simplifies the process of creating spatial 3D UI, enabling users to engage with objects and
+                    controls in a more intuitive way.
+                </p>
+            </div>
+        </section>
+
+        <!-- 3. Console-grade 3D Rendering -->
+        <section class="feature" id="3d-rendering">
+            <video class="feature-thumbnail" autoplay loop muted playsinline>
+                <source src="fluorite-graphics.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+            <div class="feature-text">
+                <h3 class="">Console-grade 3D Rendering</h3>
+                <p class="text-stone-400 text-sm sm:text-base">
+                    Powered by Google's Filament renderer, Fluorite leverages modern graphics APIs such as Vulkan to
+                    deliver stunning, hardware-accelerated visuals
+                    comparable to those found on gaming consoles. With support for physically-accurate lighting and
+                    assets, post-processing effects, and custom shaders,
+                    the developers can create visually rich and captivating environments.
+                </p>
+            </div>
+        </section>
+
+        <!-- 4. Hot Reload -->
+        <section class="feature" id="hot-reload">
+            <video class="feature-thumbnail" autoplay loop muted playsinline>
+                <source src="fluorite-hotreload.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+            <div class="feature-text">
+                <h3 class="">Hot Reload</h3>
+                <p class="text-stone-400 text-sm sm:text-base">
+                    Thanks to its Flutter/Dart integration, Fluorite's scenes are enabled for Hot Reload!
+                    This allows developers to update their scenes and see the changes within just a couple frames.
+                    This significantly speeds up the development process, enabling rapid iteration and
+                    testing of game mechanics, assets, and code.
+                </p>
+            </div>
+        </section>
+
+        <!-- Coming soon -->
+
+        <hr class="my-10 md:my-24 w-3/4 border-slate-800" />
+
+        <h2 class="text-2xl md:text-3xl font-semibold mt-12 mb-6">More coming soon...</h2>
+        <div id="crystal" class="w-1/3 lg:w-1/8 xl:w-1/8 aspect-square">
             <img src="fluorite.gif" class="w-full h-full" alt="Fluorite crystal" />
         </div>
-        <h1 class="text-xl lg:text-2xl text-white" style="font-family: 'Tilt Neon';">
-            Fluorite
-        </h1>
     </div>
     <!-- footer: position at bottom -->
-    <footer class="absolute bottom-0 w-full px-8 py-6 text-left text-stone-600 text-xs sm:text-sm">
+    <footer class="w-full px-8 py-6 mt-8 md:mt-16 text-left text-stone-600 text-xs sm:text-sm">
         &copy; 2026 Toyota Connected North America. All rights reserved.
     </footer>
 </body>
